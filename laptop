@@ -1,0 +1,106 @@
+#!/bin/sh
+
+# Welcome to the thoughtbot laptop script!
+# Be prepared to turn your laptop (or desktop, no haters here)
+# into an awesome development machine.
+
+fancy_echo() {
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
+print_oracle() {
+  local oracle=`which elm-oracle`
+  fancy_echo "Update language-elm setting for elm-oracle to $oracle"
+}
+
+# shellcheck disable=SC2154
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
+set -e
+
+if [ ! -d "$HOME/.bin/" ]; then
+  mkdir "$HOME/.bin"
+fi
+
+if command -v apm 2>/dev/null; then
+  fancy_echo "Atom already installed. Continuing…"
+else
+  fancy_echo "Missing Atom. Installing…"
+  curl -Lo ~/Downloads/atom.zip https://atom.io/download/mac
+  unzip ~/Downloads/atom.zip -d /Applications
+  open /Applications/Atom.app
+  fancy_echo "Allow Atom to install its binaries then rerun this script"
+  exit 0
+fi
+
+HOMEBREW_PREFIX="/usr/local"
+
+if [ -d "$HOMEBREW_PREFIX" ]; then
+  if ! [ -r "$HOMEBREW_PREFIX" ]; then
+    sudo chown -R "$LOGNAME:admin" /usr/local
+  fi
+else
+  sudo mkdir "$HOMEBREW_PREFIX"
+  sudo chflags norestricted "$HOMEBREW_PREFIX"
+  sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
+fi
+
+if ! command -v brew >/dev/null; then
+  fancy_echo "Installing Homebrew ..."
+    curl -fsS \
+      'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+fi
+
+if brew list | grep -Fq brew-cask; then
+  fancy_echo "Uninstalling old Homebrew-Cask ..."
+  brew uninstall --force brew-cask
+fi
+
+fancy_echo "Updating Homebrew formulae ..."
+brew update
+brew bundle --file=- <<EOF
+tap "homebrew/services"
+
+# Unix
+brew "ctags"
+brew "git"
+brew "openssl"
+
+# GitHub
+brew "hub"
+
+# Programming languages and package managers
+brew "node"
+brew "elixir"
+
+# Databases
+# brew "postgres", restart_service: true
+EOF
+
+npm install -g elm
+npm install -g brunch
+npm install -g elm-format
+npm install -g elm-oracle
+
+apm install busy-signal
+apm install intentions
+apm install language-elm
+apm install language-elixir
+apm install autocomplete-elixir
+apm install elm-format
+apm install linter
+apm install linter-elixirc
+apm install linter-elm-make
+
+
+if [ -f "$HOME/.laptop.local" ]; then
+  fancy_echo "Running your customizations from ~/.laptop.local ..."
+  # shellcheck disable=SC1090
+  . "$HOME/.laptop.local"
+fi
+
+print_oracle
+fancy_echo "Append 'node_modules, elm-stuff, deps' to the end Atom's Core Settings -> Ignored Names"

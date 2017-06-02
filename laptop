@@ -16,6 +16,15 @@ print_oracle() {
   fancy_echo "Update language-elm setting for elm-oracle to $oracle"
 }
 
+create_postgres_user() {
+  local c=`psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='postgres'"`
+  if [ "$c" -eq "1" ]; then
+    fancy_echo "Postgres user already exists. Continuing…"
+  else
+    /usr/local/bin/createuser -s postgres
+  fi
+}
+
 # shellcheck disable=SC2154
 trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
 
@@ -100,9 +109,14 @@ brew "rbenv"
 brew "postgres", restart_service: true
 EOF
 
-/usr/local/bin/createuser -s postgres
+create_postgres_user
 
-rbenv install 2.2.1
+if rbenv versions | grep 2.2.1 2>/dev/null; then
+  fancy_echo "Ruby 2.2.1 already installed. Continuing…"
+else
+  rbenv install 2.2.1
+fi
+
 
 npm install -g elm
 npm install -g brunch

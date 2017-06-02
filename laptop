@@ -25,6 +25,13 @@ if [ ! -d "$HOME/.bin/" ]; then
   mkdir "$HOME/.bin"
 fi
 
+if command -v xcodebuild 2>/devl/null; then
+  fancy_echo "Xcode already installed. Continuing…"
+else
+  fancy_echo "Install Xcode from the Mac App Store"
+  exit 0
+fi
+
 if command -v apm 2>/dev/null; then
   fancy_echo "Atom already installed. Continuing…"
 else
@@ -32,7 +39,7 @@ else
   curl -Lo ~/Downloads/atom.zip https://atom.io/download/mac
   unzip ~/Downloads/atom.zip -d /Applications
   open /Applications/Atom.app
-  fancy_echo "Allow Atom to install its binaries then rerun this script"
+  fancy_echo "Once Atom has launched, rerun this script"
   exit 0
 fi
 
@@ -69,16 +76,25 @@ brew "ctags"
 brew "git"
 brew "openssl"
 
+# VM
+cask "virtualbox"
+cask "vagrant"
+
 # GitHub
 brew "hub"
 
 # Programming languages and package managers
 brew "node"
 brew "elixir"
+brew "rbenv"
 
 # Databases
-# brew "postgres", restart_service: true
+brew "postgres", restart_service: true
 EOF
+
+/usr/local/bin/createuser -s postgres
+
+rbenv install 2.2.1
 
 npm install -g elm
 npm install -g brunch

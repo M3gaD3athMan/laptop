@@ -25,7 +25,15 @@ if [ ! -d "$HOME/.bin/" ]; then
   mkdir "$HOME/.bin"
 fi
 
-if command -v xcodebuild 2>/devl/null; then
+if command -v aws 2>/dev/null; then
+  fancy_echo "AWS CLI already installed. Continuing…"
+else
+  curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o ~/Downloads/awscli-bundle.zip
+  unzip ~/Downloads/awscli-bundle.zip -d ~/Downloads
+  sudo ~/Downloads/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+fi
+
+if command -v xcodebuild 2>/dev/null; then
   fancy_echo "Xcode already installed. Continuing…"
 else
   fancy_echo "Install Xcode from the Mac App Store"
@@ -105,11 +113,13 @@ apm install busy-signal
 apm install intentions
 apm install language-elm
 apm install language-elixir
+apm install language-docker
 apm install autocomplete-elixir
 apm install elm-format
 apm install linter
 apm install linter-elixirc
 apm install linter-elm-make
+apm install linter-docker
 
 
 if [ -f "$HOME/.laptop.local" ]; then

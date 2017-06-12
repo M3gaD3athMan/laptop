@@ -105,6 +105,9 @@ brew "node"
 brew "elixir"
 brew "rbenv"
 
+# Secrets Manager
+brew "vault"
+
 # Databases
 brew "postgres", restart_service: true
 EOF

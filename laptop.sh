@@ -13,7 +13,7 @@ fancy_echo() {
 
 print_oracle() {
   local oracle=`which elm-oracle`
-  fancy_echo "Update language-elm setting for elm-oracle to $oracle"
+  fancy_echo "In Atom, open Settings ➡️ Packages ➡️ language-elm ➡️ Settings and update elm-oracle path to $oracle"
 }
 
 create_postgres_user() {
@@ -32,6 +32,16 @@ set -e
 
 if [ ! -d "$HOME/.bin/" ]; then
   mkdir "$HOME/.bin"
+fi
+
+HOMEBREW_PREFIX="/usr/local"
+
+if [ -d "$HOMEBREW_PREFIX" ]; then
+  sudo chown -R "$LOGNAME:admin" /usr/local
+else
+  sudo mkdir "$HOMEBREW_PREFIX"
+  sudo chflags norestricted "$HOMEBREW_PREFIX"
+  sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
 fi
 
 if command -v aws 2>/dev/null; then
@@ -58,18 +68,6 @@ else
   open /Applications/Atom.app
   fancy_echo "Once Atom has launched, rerun this script"
   exit 0
-fi
-
-HOMEBREW_PREFIX="/usr/local"
-
-if [ -d "$HOMEBREW_PREFIX" ]; then
-  if ! [ -r "$HOMEBREW_PREFIX" ]; then
-    sudo chown -R "$LOGNAME:admin" /usr/local
-  fi
-else
-  sudo mkdir "$HOMEBREW_PREFIX"
-  sudo chflags norestricted "$HOMEBREW_PREFIX"
-  sudo chown -R "$LOGNAME:admin" "$HOMEBREW_PREFIX"
 fi
 
 if ! command -v brew >/dev/null; then
@@ -109,10 +107,11 @@ brew "rbenv"
 brew "vault"
 
 # Databases
-brew "postgres", restart_service: true
+# brew "postgres", restart_service: true
 EOF
 
-create_postgres_user
+# Need to wait for postgres to finish starting up before running this
+# create_postgres_user
 
 if rbenv versions | grep 2.2.1 2>/dev/null; then
   fancy_echo "Ruby 2.2.1 already installed. Continuing…"
@@ -122,7 +121,6 @@ fi
 
 
 npm install -g elm
-npm install -g brunch
 npm install -g elm-format
 npm install -g elm-oracle
 
@@ -145,5 +143,7 @@ if [ -f "$HOME/.laptop.local" ]; then
   . "$HOME/.laptop.local"
 fi
 
+fancy_echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 print_oracle
-fancy_echo "Append 'node_modules, elm-stuff, deps' to the end Atom's Core Settings -> Ignored Names"
+fancy_echo "In Atom, open Settings ➡️ Core and append 'node_modules, elm-stuff, deps' to the end of Ignored Names"
+fancy_echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"

@@ -102,9 +102,7 @@ brew "hub"
 brew "node"
 brew "elixir"
 brew "rbenv"
-
-# Secrets Manager
-brew "vault"
+brew "go"
 
 # Databases
 # brew "postgres", restart_service: true
@@ -119,11 +117,12 @@ else
   rbenv install 2.2.1
 fi
 
-
+fancy_echo "Installing Elm…"
 npm install -g elm
 npm install -g elm-format
 npm install -g elm-oracle
 
+fancy_echo "Installing Atom packages…"
 apm install busy-signal
 apm install intentions
 apm install language-elm
@@ -135,6 +134,26 @@ apm install linter
 apm install linter-elixirc
 apm install linter-elm-make
 apm install linter-docker
+
+if command -v vault 2>/dev/null; then
+  fancy_echo "Vault already installed. Continuing…"
+else
+  # Vault's homebrew version is built using go's pure go DNS resolver
+  # This causes big problems on macOS. See https://github.com/hashicorp/vault/issues/712
+  # Building from source allows us to force the cgo DNS resolver
+  fancy_echo "Installing Vault (secrets manager)"
+  mkdir -p ~/.golang/src/github.com/hashicorp
+  if [ -z $GOPATH ]; then
+    echo "export GOPATH=~/.golang" >> ~/.bash_profile
+    echo "export PATH=$GOPATH/bin:\$PATH"  >> ~/.bash_profile
+    source ~/.bash_profile
+  fi
+  git clone https://github.com/hashicorp/vault.git ~/.golang/src/github.com/hashicorp/vault
+  WD=`pwd`
+  cd ~/.golang/src/github.com/hashicorp/vault
+  make bootstrap && make dev-dynamic
+  cd $WD
+fi
 
 
 if [ -f "$HOME/.laptop.local" ]; then

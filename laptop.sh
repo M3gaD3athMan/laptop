@@ -104,7 +104,7 @@ brew "elixir"
 brew "rbenv"
 brew "go"
 
-# GrqphiQL
+# GraphiQL
 cask "grqphiql"
 
 # Databases

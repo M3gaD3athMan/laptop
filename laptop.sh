@@ -104,6 +104,9 @@ brew "elixir"
 brew "rbenv"
 brew "go"
 
+# GraphiQL
+cask "graphiql"
+
 # Databases
 # brew "postgres", restart_service: true
 EOF

@@ -104,6 +104,9 @@ brew "elixir"
 brew "rbenv"
 brew "go"
 
+# GrqphiQL
+cask "grqphiql"
+
 # Databases
 # brew "postgres", restart_service: true
 EOF

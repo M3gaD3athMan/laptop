@@ -105,7 +105,7 @@ brew "rbenv"
 brew "go"
 
 # GraphiQL
-cask "grqphiql"
+cask "graphiql"
 
 # Databases
 # brew "postgres", restart_service: true

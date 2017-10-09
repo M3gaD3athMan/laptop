@@ -19,6 +19,11 @@ $ sh ./vs-code/install
 $ sh vs-code/updateConfig
 ```
 
+Optional: Atom Editor
+```sh
+$ sh ./atom/install
+```
+
 ## Result
 
 Script will install:

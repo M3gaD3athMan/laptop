@@ -108,7 +108,6 @@ fancy_echo "Installing Elm…"
 npm install -g elm
 npm install -g elm-format
 npm install -g elm-oracle
-npm install -g yarn
 
 
 if command -v vault 2>/dev/null; then

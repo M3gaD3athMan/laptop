@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Welcome to the thoughtbot laptop script!
+# Welcome to the Corvus laptop script!
 # Be prepared to turn your laptop (or desktop, no haters here)
 # into an awesome development machine.
 
@@ -9,11 +9,6 @@ fancy_echo() {
 
   # shellcheck disable=SC2059
   printf "\n$fmt\n" "$@"
-}
-
-print_oracle() {
-  local oracle=`which elm-oracle`
-  fancy_echo "In Atom, open Settings ➡️ Packages ➡️ language-elm ➡️ Settings and update elm-oracle path to $oracle"
 }
 
 create_postgres_user() {
@@ -56,17 +51,7 @@ if command -v xcodebuild 2>/dev/null; then
   fancy_echo "Xcode already installed. Continuing…"
 else
   fancy_echo "Install Xcode from the Mac App Store"
-  exit 0
-fi
-
-if command -v apm 2>/dev/null; then
-  fancy_echo "Atom already installed. Continuing…"
-else
-  fancy_echo "Missing Atom. Installing…"
-  curl -Lo ~/Downloads/atom.zip https://atom.io/download/mac
-  unzip ~/Downloads/atom.zip -d /Applications
-  open /Applications/Atom.app
-  fancy_echo "Once Atom has launched, rerun this script"
+  fancy_echo "♻️♻️ Rerun the this script again! ♻️♻️"
   exit 0
 fi
 
@@ -108,7 +93,7 @@ brew "go"
 cask "graphiql"
 
 # Databases
-# brew "postgres", restart_service: true
+brew "postgresql", restart_service: true
 EOF
 
 # Need to wait for postgres to finish starting up before running this
@@ -125,18 +110,6 @@ npm install -g elm
 npm install -g elm-format
 npm install -g elm-oracle
 
-fancy_echo "Installing Atom packages…"
-apm install busy-signal
-apm install intentions
-apm install language-elm
-apm install language-elixir
-apm install language-docker
-apm install autocomplete-elixir
-apm install elm-format
-apm install linter
-apm install linter-elixirc
-apm install linter-elm-make
-apm install linter-docker
 
 if command -v vault 2>/dev/null; then
   fancy_echo "Vault already installed. Continuing…"
@@ -159,13 +132,26 @@ else
 fi
 
 
+if hash docker 2>/dev/null; then
+  fancy_echo "🐋 Docker already Installed. Continuing…"
+else
+  fancy_echo "🐋 Getting Docker CE"
+  curl "https://download.docker.com/mac/stable/Docker.dmg" -o ~/Downloads/Docker.dmg
+
+  hdiutil attach ~/Downloads/Docker.dmg
+
+  cp -ir /Volumes/Docker/Docker.app /Applications
+
+  sudo hdiutil unmount /Volumes/Docker
+
+  fancy_echo "🐋 Docker successfully installed"
+fi
+
+
 if [ -f "$HOME/.laptop.local" ]; then
   fancy_echo "Running your customizations from ~/.laptop.local ..."
   # shellcheck disable=SC1090
   . "$HOME/.laptop.local"
 fi
 
-fancy_echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-print_oracle
-fancy_echo "In Atom, open Settings ➡️ Core and append 'node_modules, elm-stuff, deps' to the end of Ignored Names"
-fancy_echo "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
+fancy_echo "🔥🔥 Success! 🔥🔥"

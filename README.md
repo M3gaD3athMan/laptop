@@ -1,5 +1,7 @@
 # Laptop
 
+Corvus version of the thoughtbot laptop script
+
 ## Running
 
 ```sh
@@ -12,22 +14,25 @@ $ ./laptop
 Optional: Visual Studio Code Editor
 
 ```sh
-$ sh vs-code/install
+$ sh ./vs-code/install
 # If you update your settings and want to push them
 $ sh vs-code/updateConfig
-$ git status
+```
+
+Optional: Atom Editor
+```sh
+$ sh ./atom/install
 ```
 
 ## Result
 
 Script will install:
 
-* [Atom](https://atom.io) editor
+* [Docker](https://www.docker.com/) container manager
 * [Homebrew](https://brew.sh) package manager
 * [Elm](http://elm-lang.org) language
 * [Elixir](https://elixir-lang.org) language
 * [Node](https://nodejs.org/en/) and NPM
-* Atom packages for Elm and Elixir
 * AWS CLI
 
 

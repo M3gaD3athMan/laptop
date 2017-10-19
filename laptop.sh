@@ -2,7 +2,7 @@
 
 # Welcome to the Corvus laptop script!
 # Be prepared to turn your laptop (or desktop, no haters here)
-# into an awesome development machine. 
+# into an awesome development machine.
 
 fancy_echo() {
   local fmt="$1"; shift
@@ -51,6 +51,7 @@ if command -v xcodebuild 2>/dev/null; then
   fancy_echo "Xcode already installed. Continuing…"
 else
   fancy_echo "Install Xcode from the Mac App Store"
+  fancy_echo "♻️♻️ Rerun the this script again! ♻️♻️"
   exit 0
 fi
 

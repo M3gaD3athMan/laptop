@@ -88,6 +88,7 @@ brew "node"
 brew "elixir"
 brew "rbenv"
 brew "go"
+brew "rebar"
 
 # GraphiQL
 cask "graphiql"

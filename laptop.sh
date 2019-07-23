@@ -32,7 +32,6 @@ fi
 HOMEBREW_PREFIX="/usr/local"
 
 mkdir -p $HOMEBREW_PREFIX
-sudo chown -R "$LOGNAME" $HOMEBREW_PREFIX/*
 
 if command -v aws 2>/dev/null; then
   fancy_echo "AWS CLI already installed. Continuing…"

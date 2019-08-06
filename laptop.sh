@@ -79,7 +79,7 @@ brew "node"
 brew "elixir"
 brew "rebar"
 
-brew "vault", args: ["with-dynamic"]
+brew "vault"
 cask "graphiql"
 brew "postgresql", restart_service: true
 EOF

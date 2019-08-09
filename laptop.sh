@@ -74,8 +74,8 @@ brew "openssl"
 brew "hub"
 
 # Programming languages and package managers
+brew "node@10" # install node@10 or node@11 first; yarn auto-installs node@12 as a dependency, which doesn't work nicely with our assets.
 brew "yarn"
-brew "node"
 brew "elixir"
 brew "rebar"
 

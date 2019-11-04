@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Use `~/.aws/credentials` as the source of truth. Always export from there, so the file is updated first
+# Please add these to your bash_rc or equivalent
+#
+# export AWS_ACCESS_KEY_ID=$(sed -n 2p ~/.aws/credentials | sed 's/.*=//g')
+# export AWS_SECRET_ACCESS_KEY=$(sed -n 3p ~/.aws/credentials | sed 's/.*=//g')
+
+set -eo pipefail
 echo " 🔐 Initiating AWS auth through Vault 🔐 "
 
 if [ -z "$GIT_TOKEN" ]; then
@@ -16,6 +23,9 @@ export AWS_SECRET_ACCESS_KEY=$(sed -n 7p temp | sed 's/.* //g')
 
 echo "\nWriting to .aws/credentials…"
 
+mkdir -p ~/.aws
+touch ~/.aws/credentials
+
 cp ~/.aws/credentials ~/.aws/deprecated_creds
 
 cat >~/.aws/credentials <<EOF
@@ -26,4 +36,4 @@ EOF
 
 rm ./temp
 
-echo "Successfully updated your AWS creds.\n"
+echo "🎉 Successfully updated your AWS creds. 🎉 \n"

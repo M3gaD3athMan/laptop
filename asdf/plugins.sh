@@ -14,9 +14,9 @@ echo "\nElixir Setup…"
 asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 
 echo "\nNodejs Setup…"
-# asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-# brew install gpg
-# bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+brew install gpg
+bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 
 echo "\nElm Setup…"
 asdf plugin-add elm https://github.com/asdf-community/asdf-elm.git
@@ -27,4 +27,4 @@ asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
 echo "\nPython Setup…"
 asdf plugin-add python
 
-echo "\n👨‍🔬asdf successfully configured! 👩‍🔬"
+echo "\n👨‍🔬asdf successfully configured! Next step in the Readme 👩‍🔬"

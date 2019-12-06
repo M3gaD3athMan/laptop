@@ -63,7 +63,11 @@ These steps are all taken care of in the `plugins.sh` script
 
 ### Yarn
 * Using brew right now
-* `brew install yarn --without-node`
+* asdf version should take priority and yarn will have its own version of node for itself.
+* ```
+  ➜  crowbar git:(master) which node
+  /Users/aaron/.asdf/shims/node
+  ```
 * `yarn -v`
 
 ### Elm

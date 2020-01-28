@@ -7,7 +7,7 @@ Corvus version of the thoughtbot laptop script
 ```sh
 $ git clone git@github.com:corvusinsurance/laptop.git
 $ cd laptop
-$ ./laptop
+$ ./laptop.sh
 # If necessary: `chmod u+x laptop`
 ```
 
@@ -21,7 +21,7 @@ $ sh vs-code/updateConfig
 
 Optional: Atom Editor
 ```sh
-$ sh ./atom/install
+$ sh ./atom/install.sh
 ```
 
 ## Result
@@ -39,5 +39,4 @@ Script will install:
 ## Warnings
 
 If you aren't using bash as your default shell then you might have issues with Vault.
- - It saves the gopath into your bash_profile by default, just add it to whatever rc file you are using ie. zshrc 
-
+ - It saves the gopath into your bash_profile by default, just add it to whatever rc file you are using ie. zshrc

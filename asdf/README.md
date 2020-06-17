@@ -7,10 +7,10 @@ Provides a way to share and specify exactly which language versions we need
 
 ```
 <!-- run from this directory (laptop/asdf) -->
-sh ./install.sh
+zsh ./install.zsh
 
 # Open a new terminal
-sh ./plugins.sh
+zsh ./plugins.zsh
 
 export KERL_CONFIGURE_OPTIONS="--without-javac"
 asdf install

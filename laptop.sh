@@ -44,7 +44,7 @@ fi
 if command -v xcodebuild 2>/dev/null; then
   fancy_echo "Xcode already installed. Continuing…"
 else
-  fancy_echo "Install Xcode from the Mac App Store"
+  fancy_echo "Install Xcode by running 'xcode-select --install'"
   fancy_echo "♻️♻️ Rerun the this script again! ♻️♻️"
   exit 0
 fi

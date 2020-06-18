@@ -43,7 +43,7 @@ Install it, add to your shell (if you're not sure, it's probably `~/.zshrc`), up
 Each language has a "plugin", and some have additional dependencies.
 For example, erlang needs another homebrew package, etc.
 
-These steps are all taken care of in the `plugins.sh` script
+These steps are all taken care of in the `plugins.zsh` script
 
 ### Erlang
 * https://github.com/asdf-vm/asdf-erlang

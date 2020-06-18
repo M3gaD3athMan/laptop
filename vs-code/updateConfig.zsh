@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 EXTENSIONS=$MYDIR/extensions.config

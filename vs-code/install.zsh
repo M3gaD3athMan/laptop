@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 echo "🌀🌀 Installing Visual Studio Code 🌀🌀"
 
@@ -14,13 +14,13 @@ if hash code 2>/dev/null; then
 
   echo "🌀 Looks like the CLI installed correctly"
   <$EXTENSIONS xargs -n 1 code --install-extension
-  
+
   echo "🌀 Copy my settings into lib/app/code"
   cp -f $SETTINGS ~/Library/Application\ Support/Code/User/settings.json
 
   echo "🌀 Copy my snipets into lib/app/code"
   cp -f $SNIPPETS ~/Library/Application\ Support/Code/User/snippets/
-  
+
 else
 
   echo "🌀 Installing Visual Studio Code"

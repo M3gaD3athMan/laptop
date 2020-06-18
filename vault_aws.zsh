@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Use `~/.aws/credentials` as the source of truth. Always export from there, so the file is updated first
-# Please add these to your bash_rc or equivalent
+# Please add these to your .zshrc or equivalent
 #
 # export AWS_ACCESS_KEY_ID=$(sed -n 2p ~/.aws/credentials | sed 's/.*=//g')
 # export AWS_SECRET_ACCESS_KEY=$(sed -n 3p ~/.aws/credentials | sed 's/.*=//g')

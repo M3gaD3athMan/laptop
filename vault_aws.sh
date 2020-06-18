@@ -34,6 +34,8 @@ aws_access_key_id=${AWS_ACCESS_KEY_ID}
 aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}
 EOF
 
+echo -e "\nexport VAULT_ADDR=https://vault.corvusinsurance.com" >> ~/.zshrc
+
 rm ./temp
 
 echo "🎉 Successfully updated your AWS creds. 🎉 \n"

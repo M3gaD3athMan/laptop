@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Welcome to the Corvus laptop script!
 # Be prepared to turn your laptop (or desktop, no haters here)
@@ -76,7 +76,6 @@ brew "hub"
 # Programming languages and package managers
 brew "node@10" # install node@10 or node@11 first; yarn auto-installs node@12 as a dependency, which doesn't work nicely with our assets.
 brew "yarn"
-brew "elixir"
 brew "rebar"
 
 brew "vault"

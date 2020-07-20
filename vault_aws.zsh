@@ -13,6 +13,10 @@ if [ -z "$GIT_TOKEN" ]; then
   echo >&2 'error: missing GIT_TOKEN environment variable. Create one here: https://github.com/settings/tokens' && exit 1
 fi
 
+if [ -z "$VAULT_ADDR" ]; then
+  echo -e "\nexport VAULT_ADDR=https://vault.corvusinsurance.com" >> ~/.zshrc
+fi
+
 vault login -method=github token=$GIT_TOKEN
 vault read aws/creds/dev > temp
 
@@ -34,9 +38,6 @@ aws_access_key_id=${AWS_ACCESS_KEY_ID}
 aws_secret_access_key=${AWS_SECRET_ACCESS_KEY}
 EOF
 
-if [ -z "$VAULT_ADDR" ]; then
-  echo -e "\nexport VAULT_ADDR=https://vault.corvusinsurance.com" >> ~/.zshrc
-fi
 
 rm ./temp
 

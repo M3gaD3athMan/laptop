@@ -15,6 +15,7 @@ fi
 
 if [ -z "$VAULT_ADDR" ]; then
   echo -e "\nexport VAULT_ADDR=https://vault.corvusinsurance.com" >> ~/.zshrc
+  export VAULT_ADDR=https://vault.corvusinsurance.com
 fi
 
 vault login -method=github token=$GIT_TOKEN

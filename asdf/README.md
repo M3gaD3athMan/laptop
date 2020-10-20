@@ -47,6 +47,7 @@ These steps are all taken care of in the `plugins.zsh` script
 
 ### Erlang
 * https://github.com/asdf-vm/asdf-erlang
+* Step by step guide: https://dev.to/drebits/how-to-install-erlang-on-macos-with-asdf-3p1c
 * Requires an extra homebrew package `wxmac`
 * May prompt that you need java (it's optional, so ignoring is 👌)
 

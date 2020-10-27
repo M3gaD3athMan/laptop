@@ -64,6 +64,7 @@ fancy_echo "Updating Homebrew formulae ..."
 brew update
 brew bundle --file=- <<EOF
 tap "homebrew/services"
+tap "hashicorp/tap"
 
 # Unix
 brew "ctags"
@@ -78,7 +79,7 @@ brew "node@10" # install node@10 or node@11 first; yarn auto-installs node@12 as
 brew "yarn"
 brew "rebar"
 
-brew "vault"
+brew "hashicorp/tap/vault"
 cask "graphiql"
 brew "postgresql", restart_service: true
 EOF

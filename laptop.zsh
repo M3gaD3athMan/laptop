@@ -33,14 +33,6 @@ HOMEBREW_PREFIX="/usr/local"
 
 mkdir -p $HOMEBREW_PREFIX
 
-if command -v aws 2>/dev/null; then
-  fancy_echo "AWS CLI already installed. Continuing…"
-else
-  curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o ~/Downloads/awscli-bundle.zip
-  unzip ~/Downloads/awscli-bundle.zip -d ~/Downloads
-  sudo ~/Downloads/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-fi
-
 if command -v xcodebuild 2>/dev/null; then
   fancy_echo "Xcode already installed. Continuing…"
 else
@@ -51,11 +43,10 @@ fi
 
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
-    curl -fsS \
-      'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-if brew list | grep -Fq brew-cask; then
+if brew list --formula | grep -Fq brew-cask; then
   fancy_echo "Uninstalling old Homebrew-Cask ..."
   brew uninstall --force brew-cask
 fi
@@ -70,12 +61,14 @@ tap "hashicorp/tap"
 brew "ctags"
 brew "git"
 brew "openssl"
+brew "awscli"
+brew "pre-commit"
 
 # GitHub
-brew "hub"
+brew "gh"
 
 # Programming languages and package managers
-brew "node@10" # install node@10 or node@11 first; yarn auto-installs node@12 as a dependency, which doesn't work nicely with our assets.
+brew "node"
 brew "yarn"
 brew "rebar"
 
@@ -83,6 +76,7 @@ brew "hashicorp/tap/vault"
 cask "graphiql"
 brew "postgresql", restart_service: true
 EOF
+brew link vault
 
 fancy_echo "Installing Elm…"
 yarn global add elm --prefix /usr/local

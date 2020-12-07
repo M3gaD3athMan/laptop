@@ -19,6 +19,9 @@ asdf install
 cat .tool-versions | xargs -L1 asdf global
 
 asdf current
+
+# Install elm
+zsh ./elm.zsh
 ```
 
 ## Update
@@ -64,13 +67,8 @@ These steps are all taken care of in the `plugins.zsh` script
 
 
 ### Yarn
-* Using brew right now
-* asdf version should take priority and yarn will have its own version of node for itself.
-* ```
-  ➜  crowbar git:(master) which node
-  /Users/aaron/.asdf/shims/node
-  ```
-* `yarn -v`
+* https://github.com/twuni/asdf-yarn
+
 
 ### Elm
 * https://github.com/asdf-community/asdf-elm

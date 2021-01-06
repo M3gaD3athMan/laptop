@@ -67,21 +67,11 @@ brew "pre-commit"
 # GitHub
 brew "gh"
 
-# Programming languages and package managers
-brew "node"
-brew "yarn"
-brew "rebar"
-
 brew "hashicorp/tap/vault"
 cask "graphiql"
 brew "postgresql", restart_service: true
 EOF
 brew link vault
-
-fancy_echo "Installing Elm…"
-yarn global add elm --prefix /usr/local
-yarn global add elm-format --prefix /usr/local
-yarn global add elm-oracle --prefix /usr/local
 
 if hash docker 2>/dev/null; then
   fancy_echo "🐋 Docker already Installed. Continuing…"
@@ -108,3 +98,5 @@ if [ -f "$HOME/.laptop.local" ]; then
 fi
 
 fancy_echo "🔥🔥 Success! 🔥🔥"
+
+fancy_echo "Next cd into the asdf directory and follow the installation instructions there"
